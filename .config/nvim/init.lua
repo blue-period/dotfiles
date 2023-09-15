@@ -20,41 +20,60 @@ local mason = require("lsp.mason")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.3",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
-		opts = telescope,
-		keys = {
-			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
-		},
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
-		opts = lualine,
-	},
-	{ "hrsh7th/cmp-nvim-lsp" },
-	lspconfig,
-	mason,
-	{
-		"mason-lspconfig.nvim",
-		opts = {}
-	},
+    {
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.3",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-lua/popup.nvim" },
+        opts = telescope,
+        keys = {
+            { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
+        },
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+        opts = lualine,
+    },
+    { "hrsh7th/cmp-nvim-lsp" },
+    lspconfig,
+    mason,
+    {
+        "mason-lspconfig.nvim",
+        opts = {}
+    },
     {
         "hrsh7th/nvim-cmp"
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+        config = function() require("luasnip.loaders.from_vscode").lazy_load() end
+    },
+    {
+        "ggandor/leap.nvim",
+        dependencies = {"tpope/vim-repeat"},
+        config = function() require('leap').add_default_mappings() end
     }
+
 })
