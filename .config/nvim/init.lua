@@ -74,6 +74,37 @@ require("lazy").setup({
         "ggandor/leap.nvim",
         dependencies = {"tpope/vim-repeat"},
         config = function() require('leap').add_default_mappings() end
-    }
+    },
+    { "lukas-reineke/indent-blankline.nvim" },
+    {'norcalli/nvim-colorizer.lua'},
+    {
+        'iamcco/markdown-preview.nvim',
+        build = 'cd app && yarn install'
+    },
+    {   
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            require("plugins.treesitter")
+        end
+    },
+
+    {
+        "windwp/nvim-ts-autotag",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        lazy = true,
+        event = "VeryLazy",
+        config = function()
+            require('nvim-ts-autotag').setup({
+                filetypes = {
+                    'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript',
+                    'xml',
+                    'php',
+                    'markdown',
+                    'astro', 'glimmer', 'handlebars', 'hbs'
+                }
+            })
+        end
+    },
 
 })
