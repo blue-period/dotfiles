@@ -1,9 +1,9 @@
-To make this repo I moved all of the relevant dotfiles to the repo and then created sym links back to their original location in $HOME
+To make this repo I moved all of the relevant dotfiles to the repo and then created sym links back to their original locations in $HOME
 
 one note is that YOU NEED TO MAKE SURE YOU USE ABSOLUTE PATHS WHEN MAKING THE SYM LINKS
 
 if not, your configs wont work properly
 
-ln -nfs /Users/user/dotfiles/.config /Users/user/.config
+i.e: ln -nfs /Users/user/dotfiles/.config /Users/user/.config
 
 
