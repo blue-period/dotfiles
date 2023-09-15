@@ -1,0 +1,27 @@
+#lazy git
+brew install lazygit
+
+#nerd font
+https://webinstall.dev/nerdfont/
+
+#using tpm or terminal plugin manager to install tmux plugins
+https://github.com/tmux-plugins/tpm
+
+#to get the lualine working you need the right nerd font
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font --cask
+then set the font in iterm2
+
+#lazyvim can be weird looking at examples and also these two resources are invaluable
+https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/init.lua
+https://www.lazyvim.org
+https://github.com/folke/lazy.nvim#-plugin-spec
+
+#lazy installs here: https://github.com/folke/lazy.nvim#-uninstalling
+
+#Basic lua knowledge
+in your base init.lua script when you require something it looks in the lua folder as a base directory. Then you can separate folders and lua files with . like lazyvim.util. If the folder has a init.lua file in it then the last part of the path can be the name of the folder otherwise you need to have the last part of the path be the name of the lua file
+
+#great example to show off how to use lspconfig with lazy.nvim
+
+https://gitlab.com/of_jorts/dotfiles/-/raw/main/nvim/.config/nvim/lua/plugins/lsp.lua?ref_type=heads
