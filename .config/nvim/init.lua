@@ -56,7 +56,26 @@ require("lazy").setup({
     },
     {
         "hrsh7th/nvim-cmp",
-        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+        dependencies = { 'hrsh7th/cmp-nvim-lsp',
+            {
+                "L3MON4D3/LuaSnip",
+                -- follow latest release.
+                version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+                -- install jsregexp (optional!).
+                build = "make install_jsregexp",
+                config = function() require("luasnip.loaders.from_vscode").lazy_load() end
+            },
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            'saadparwaiz1/cmp_luasnip',
+            "quangnguyen30192/cmp-nvim-ultisnips",
+            "SirVer/ultisnips",
+            "hrsh7th/cmp-vsnip",
+            'hrsh7th/vim-vsnip',
+            
+        },
+
         config = function()
             require("lsp.cmp")
         end
@@ -66,19 +85,12 @@ require("lazy").setup({
         event = "InsertEnter",
         opts = {} -- this is equalent to setup({}) function
     },
-    {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        config = function() require("luasnip.loaders.from_vscode").lazy_load() end
-    },
     { 'saadparwaiz1/cmp_luasnip' },
     {
         "ggandor/leap.nvim",
         dependencies = {"tpope/vim-repeat"},
         config = function() require('leap').add_default_mappings() end
+
     },
     { "lukas-reineke/indent-blankline.nvim" },
     {'norcalli/nvim-colorizer.lua'},

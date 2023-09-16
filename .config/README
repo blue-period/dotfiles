@@ -35,3 +35,11 @@ https://gitlab.com/of_jorts/dotfiles/-/raw/main/nvim/.config/nvim/lua/plugins/ls
 # pbcopy and pbpaste are good tools as well
 ie: echo hey | pbcopy
 pbpaste > hey
+
+
+for ultisnips you need to sure that the version of python that you are using has neovim installed so 
+/Users/user/miniconda3/bin/python3 -m pip install neovim
+
+zoom pane is the best thing ever and I cant believe I just found out <prefix> + z is to go full screen with the current pane youre in
+
+
