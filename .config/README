@@ -32,3 +32,6 @@ in your base init.lua script when you require something it looks in the lua fold
 
 https://gitlab.com/of_jorts/dotfiles/-/raw/main/nvim/.config/nvim/lua/plugins/lsp.lua?ref_type=heads
 
+# pbcopy and pbpaste are good tools as well
+ie: echo hey | pbcopy
+pbpaste > hey

@@ -1,4 +1,6 @@
 alias v="nvim"
+alias fzf="fzf | pbcopy"
+alias fzfd="find . -type d -print | fzf"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
