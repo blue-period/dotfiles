@@ -7,6 +7,12 @@ https://webinstall.dev/nerdfont/
 #using tpm or terminal plugin manager to install tmux plugins
 https://github.com/tmux-plugins/tpm
 
+#zoxide is dope (need to install fzf as well as a dependency which is also dope)
+https://github.com/ajeetdsouza/zoxide
+
+#fzf
+https://github.com/junegunn/fzf#installation
+
 #to get the lualine working you need the right nerd font
 brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font --cask
