@@ -25,3 +25,4 @@ in your base init.lua script when you require something it looks in the lua fold
 #great example to show off how to use lspconfig with lazy.nvim
 
 https://gitlab.com/of_jorts/dotfiles/-/raw/main/nvim/.config/nvim/lua/plugins/lsp.lua?ref_type=heads
+
