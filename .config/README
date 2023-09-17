@@ -42,4 +42,13 @@ for ultisnips you need to sure that the version of python that you are using has
 
 zoom pane is the best thing ever and I cant believe I just found out <prefix> + z is to go full screen with the current pane youre in
 
+in iterm WIN + ENTER takes you in and out of full screen
 
+#install exa, make ls pretty, gives you tree
+https://the.exa.website/install
+brew install exa
+
+
+#install bat to make cat pretty and fzf search preview 
+prettyhttps://github.com/sharkdp/bat
+brew install bat

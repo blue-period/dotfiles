@@ -1,6 +1,16 @@
 alias v="nvim"
-alias fzf="fzf | pbcopy"
-alias fzfd="find . -type d -print | fzf"
+alias cat="bat"
+
+alias fzf="fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' --print0 | xargs -0 -o nvim"
+
+fzfd() {
+    cd `find * -type d | "fzf"`;
+}
+
+alias ls="exa"
+alias ll="exa -alh"
+alias tree="exa --tree"
+export LS_COLORS="di=32:gm=43:fi=33"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
