@@ -1,10 +1,17 @@
 alias v="nvim"
 alias cat="bat"
 
-alias fzf="fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' --print0 | xargs -0 -o nvim"
+fzf() { 
+    #use bashes param substitution to get the last part of the path since you are already in the folder after cding
+    command fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' | pbcopy
+    file=$(pbpaste)
+    if test -f "$file"; then
+        dir=$(dirname $file)
+        cd $dir
+        relative=${file##*/} 
+        nvim $relative
+    fi
 
-fzfd() {
-    cd `find * -type d | "fzf"`;
 }
 
 alias ls="exa"
