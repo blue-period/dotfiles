@@ -52,3 +52,6 @@ brew install exa
 #install bat to make cat pretty and fzf search preview 
 prettyhttps://github.com/sharkdp/bat
 brew install bat
+
+in order to get telescope grep to work you need to install ripgrep
+brew install ripgrep

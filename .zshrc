@@ -17,7 +17,7 @@ fzf() {
 alias ls="exa"
 alias ll="exa -alh"
 alias tree="exa --tree"
-export LS_COLORS="di=32:gm=43:fi=33"
+export LS_COLORS="di=32:gm=43:fi=33:da=31:ex=37"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
