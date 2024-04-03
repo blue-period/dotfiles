@@ -61,7 +61,7 @@ require("lazy").setup({
             {
                 "L3MON4D3/LuaSnip",
                 -- follow latest release.
-                version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+                version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
                 -- install jsregexp (optional!).
                 build = "make install_jsregexp",
                 config = function() require("luasnip.loaders.from_vscode").lazy_load() end
@@ -99,10 +99,11 @@ require("lazy").setup({
         'iamcco/markdown-preview.nvim',
         build = 'cd app && yarn install'
     },
-    {   
+    {
         "nvim-treesitter/nvim-treesitter",
-        dependencies = { 
-            "windwp/nvim-ts-autotag"
+        dependencies = {
+            "windwp/nvim-ts-autotag",
+            'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ":TSUpdate",
         config = function()
@@ -214,28 +215,6 @@ require("lazy").setup({
             })
         end
     },
-    {
-        "folke/noice.nvim",
-        config = function()
-            require("noice").setup({
-                -- add any options here
-                -- routes = {
-                --   {
-                --     view = "notify",
-                --     filter = { event = "msg_showmode" },
-                --   },
-                -- },
-            })
-        end,
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        }
-    },
     { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
         dependencies = {
@@ -248,3 +227,5 @@ require("lazy").setup({
         }
     },
 })
+
+-- notes to add, shift over on comments when using v block for some reason it never works

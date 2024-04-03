@@ -1,18 +1,18 @@
 alias v="nvim"
 alias cat="bat"
 
-fzf() { 
-    #use bashes param substitution to get the last part of the path since you are already in the folder after cding
-    command fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' | pbcopy
-    file=$(pbpaste)
-    if test -f "$file"; then
-        dir=$(dirname $file)
-        cd $dir
-        relative=${file##*/} 
-        nvim $relative
-    fi
-
-}
+#fzf() { 
+#    #use bashes param substitution to get the last part of the path since you are already in the folder after cding
+#    command fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' | pbcopy
+#    file=$(pbpaste)
+#    if test -f "$file"; then
+#        dir=$(dirname $file)
+#        cd $dir
+#        relative=${file##*/} 
+#        nvim $relative
+#    fi
+#
+#}
 
 alias ls="exa"
 alias ll="exa -alh"
@@ -38,6 +38,9 @@ unset __conda_setup
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(zoxide init zsh)"
+export AWS_CA_BUNDLE="~/Documents/JHUAPL-MS-Root-CA-05-21-2038-B64-text.cer"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
