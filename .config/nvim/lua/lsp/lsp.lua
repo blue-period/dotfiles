@@ -1,6 +1,4 @@
 local servers = {
-    --"efm", couldnt install efm with mason (wasnt working so I brew installed it: brew install efm-langserver)
-    "eslint",
     "pyright",
     "rust_analyzer",
     "lua_ls",

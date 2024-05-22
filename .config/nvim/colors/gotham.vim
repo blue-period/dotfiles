@@ -120,7 +120,7 @@ call s:Col('CursorLine', '', 'base1')
 call s:Col('CursorColumn', '', 'base1')
 
 " Sign column, line numbers.
-call s:Col('LineNr', 'base5', s:linenr_background)
+call s:Col('LineNr', 'blue', s:linenr_background)
 call s:Col('CursorLineNr', 'base5', s:linenr_background)
 call s:Col('SignColumn', '', s:linenr_background)
 call s:Col('ColorColumn', '', s:linenr_background)
@@ -176,7 +176,7 @@ call s:Col('Folded', 'base6', 'blue')
 call s:Col('FoldColumn', 'base5', 'base3')
 
 " Searching.
-call s:Col('Search', 'base2', 'orange')
+call s:Col('Search', 'base2', 'yellow')
 call s:Attr('IncSearch', 'reverse')
 
 " Popup menu.

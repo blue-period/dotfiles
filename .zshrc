@@ -1,24 +1,6 @@
 alias v="nvim"
 alias cat="bat"
 
-#fzf() { 
-#    #use bashes param substitution to get the last part of the path since you are already in the folder after cding
-#    command fzf --preview 'bat --theme=Nord --style=numbers --color=always --line-range :500 {}' | pbcopy
-#    file=$(pbpaste)
-#    if test -f "$file"; then
-#        dir=$(dirname $file)
-#        cd $dir
-#        relative=${file##*/} 
-#        nvim $relative
-#    fi
-#
-#}
-
-alias ls="exa"
-alias ll="exa -alh"
-alias tree="exa --tree"
-export LS_COLORS="di=32:gm=43:fi=33:da=31:ex=37"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/ramsddc1/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -43,4 +25,4 @@ unset __conda_setup
 eval "$(zoxide init zsh)"
 export AWS_CA_BUNDLE="~/Documents/JHUAPL-MS-Root-CA-05-21-2038-B64-text.cer"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
+#export PATH="/opt/homebrew/bin/python3:$PATH"
