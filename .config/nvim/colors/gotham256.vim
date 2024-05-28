@@ -1,13 +1,13 @@
 "                      _____ _____ _____ _   _   ___  ___  ___
 "                     |  __ \  _  |_   _| | | | / _ \ |  \/  |
 "                     | |  \/ | | | | | | |_| |/ /_\ \| .  . |
-"                     | | __| | | | | | |  _  ||  _  || |\/| |
+"                     | | __| | | | | | |  _  ||  _  || |\/| | -256
 "                     | |_\ \ \_/ / | | | | | || | | || |  | |
 "                      \____/\___/  \_/ \_| |_/\_| |_/\_|  |_/
 "
 " URL: https://github.com/whatyouhide/vim-gotham
 " Aurhor: Andrea Leopardi <an.leopardi@gmail.com>
-" Version: 1.0.0
+" Version: ϡ
 " License: MIT
 
 
@@ -16,8 +16,11 @@
 hi clear
 if exists('syntax_on') | syntax reset | endif
 set background=dark
-let g:colors_name = 'gotham'
+let g:colors_name = 'gotham256'
 
+if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256
+  finish
+endif
 
 " Helper functions =============================================================
 
@@ -68,24 +71,24 @@ endfunction
 let s:colors = {}
 
 " Base colors.
-let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 0 }
-let s:colors.base1 = { 'gui': '#11151c', 'cterm': 8 }
-let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 10 }
-let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 12 }
-let s:colors.base4 = { 'gui': '#1e6479', 'cterm': 11 }
-let s:colors.base5 = { 'gui': '#599cab', 'cterm': 14 }
-let s:colors.base6 = { 'gui': '#99d1ce', 'cterm': 7 }
-let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 15 }
+let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 232 }
+let s:colors.base1 = { 'gui': '#11151c', 'cterm': 233 }
+let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 17  }
+let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 18  }
+let s:colors.base4 = { 'gui': '#1e6479', 'cterm': 31  }
+let s:colors.base5 = { 'gui': '#599cab', 'cterm': 81  }
+let s:colors.base6 = { 'gui': '#99d1ce', 'cterm': 122 }
+let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 194 }
 
 " Other colors.
-let s:colors.red     = { 'gui': '#c23127', 'cterm': 1  }
-let s:colors.orange  = { 'gui': '#d26937', 'cterm': 9  }
-let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 3  }
-let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 13 }
-let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 5  }
-let s:colors.blue    = { 'gui': '#195466', 'cterm': 4  }
-let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 6  }
-let s:colors.green   = { 'gui': '#2aa889', 'cterm': 2  }
+let s:colors.red     = { 'gui': '#c23127', 'cterm': 124 }
+let s:colors.orange  = { 'gui': '#d26937', 'cterm': 166 }
+let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 214 }
+let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 67  }
+let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 60  }
+let s:colors.blue    = { 'gui': '#195466', 'cterm': 24  }
+let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 44  }
+let s:colors.green   = { 'gui': '#2aa889', 'cterm': 78  }
 
 " Neovim :terminal colors.
 let g:terminal_color_0  = get(s:colors.base0, 'gui')
@@ -136,11 +139,11 @@ call s:Col('Statement', 'base5')
 call s:Col('Special', 'orange')
 call s:Col('Identifier', 'base5')
 call s:Col('Operator', 'base5')
-call s:Col('Delimiter', 'orange')
+call s:Col('Delimiter', 'base6')
 call s:Col('Removed', 'red')
-call s:Col('Function', 'base5')
+call s:Col('Function', 'magenta')
 call s:Col('Changed', 'cyan')
-call s:Col('@variable', 'base5')
+call s:Col('@variable', 'base6')
 
 " Constants, Ruby symbols.
 call s:Col('Constant', 'magenta')
@@ -168,7 +171,7 @@ call s:Col('Conceal', 'cyan', s:background)
 call s:Col('Todo', 'magenta', s:background)
 
 " The column separating vertical splits.
-call s:Col('VertSplit', 'blue', s:linenr_background)
+call s:Col('VertSplit', 'base2', s:linenr_background)
 call s:Col('StatusLineNC', 'blue', 'base2')
 
 " Matching parenthesis.
@@ -239,11 +242,7 @@ call s:Col('rubyStringDelimiter', 'green')
 " HTML (and often Markdown).
 call s:Col('htmlArg', 'blue')
 call s:Col('htmlItalic', 'magenta')
-call s:Attr('htmlItalic', 'italic')
 call s:Col('htmlBold', 'cyan', '')
-call s:Attr('htmlBold', 'bold')
-call s:Col('htmlBoldItalic', 'cyan', '')
-call s:Attr('htmlBoldItalic', 'bold,italic')
 
 " Python                                                                                                                   
 call s:Col('pythonStatement', 'blue')
@@ -268,15 +267,6 @@ call s:Col('CtrlPPtrCursor', 'base7')           " cursor in the prompt
 call s:Col('UniteGrep', 'base7', 'green')
 let g:unite_source_grep_search_word_highlight = 'UniteGrep'
 
-" ale https://github.com/w0rp/ale
-call s:Col('ALEWarningSign', 'yellow', s:linenr_background)
-call s:Col('ALEErrorSign', 'red', s:linenr_background)
-
-" neomake https://github.com/neomake/neomake
-call s:Col('NeomakeWarningSign', 'yellow', s:linenr_background)
-call s:Col('NeomakeErrorSign', 'red', s:linenr_background)
-call s:Col('NeomakeWarning', 'yellow')
-call s:Col('NeomakeError', 'red')
 
 " Cleanup =====================================================================
 
