@@ -57,11 +57,6 @@ return {
             capabilities = capabilities,
         })
 
-        -- Javascript
-        lsp.eslint.setup({
-            capabilities = capabilities,
-        })
-
         -- Lua
         lsp.lua_ls.setup {
             settings = {
