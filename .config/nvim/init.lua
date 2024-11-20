@@ -232,6 +232,14 @@ require("lazy").setup({
     end
 },
 {
+    'ojroques/vim-oscyank',
+    config = function()
+        vim.keymap.set('n', '<leader>c', '<Plug>OSCYankOperator')
+        vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
+        vim.keymap.set('v', '<leader>c', '<Plug>OSCYankVisual')
+    end,
+},
+{
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
