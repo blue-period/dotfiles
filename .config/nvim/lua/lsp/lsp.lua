@@ -2,7 +2,6 @@ local servers = {
     "pyright",
     "rust_analyzer",
     "lua_ls",
-    "ruff_lsp",
 }
 
 return {
@@ -23,7 +22,6 @@ return {
         -- EFM
         local prettier = require('efmls-configs.formatters.prettier_d')
         local black = require('efmls-configs.formatters.black')
-        local ruff = require('efmls-configs.formatters.ruff')
         local languages = {
             css = { prettier },
             scss = { prettier },
@@ -34,7 +32,7 @@ return {
             typescript = { prettier },
             json = { prettier },
             markdown = { prettier },
-            python = { black, ruff },
+            python = { black},
             yaml = { prettier },
         }
         local efmls_config = {
@@ -89,15 +87,6 @@ return {
         -- Python
         lsp["pyright"].setup({
             capabilities = capabilities,
-        })
-        lsp["ruff_lsp"].setup({
-            capabilities = capabilities,
-            init_options = {
-                settings = {
-                    args = { "--select", "A,B,E,F,I,N,PT,PTH,S,SIM,UP", "--per-file-ignores", "test*:S101",
-                        "--target-version", "py311" }
-                }
-            }
         })
 
     end
