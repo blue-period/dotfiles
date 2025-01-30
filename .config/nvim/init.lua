@@ -58,6 +58,13 @@ require("lazy").setup({
     },
     {
         "hrsh7th/nvim-cmp",
+        opts = function(_, opts)
+            opts.sources = opts.sources or {}
+            table.insert(opts.sources, {
+                name = "lazydev",
+                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            })
+        end,
         dependencies = { 'hrsh7th/cmp-nvim-lsp',
         {
             "L3MON4D3/LuaSnip",
@@ -290,6 +297,98 @@ require("lazy").setup({
         }
 
     end
+},
+{
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+        library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            {"nvim-dap-ui"}
+        },
+    },
+},
+{
+    "mfussenegger/nvim-dap",
+    dependencies = {
+        "nvim-neotest/nvim-nio",
+        "rcarriga/nvim-dap-ui",
+        "mfussenegger/nvim-dap-python",
+        "theHamsta/nvim-dap-virtual-text",
+    },
+    config = function()
+        local dap = require("dap")
+
+
+
+        local dapui = require("dapui")
+        dapui.setup()
+        require("dapui").setup({})
+
+        local dap_python = require("dap-python")
+        local debugpy_path = '/home/ramsddc1/miniconda3/envs/Comfy/bin/python'
+        dap_python.setup(debugpy_path)
+        table.insert(require('dap').configurations.python, {
+            type = 'python',
+            request = 'attach',
+            name = 'My custom launch configuration',
+            program = '${file}',
+            -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+        })
+
+        require("nvim-dap-virtual-text").setup({
+            commented = true, -- Show virtual text alongside comment
+        })
+
+        vim.fn.sign_define("DapBreakpoint", {
+            text = "",
+            texthl = "DiagnosticSignError",
+            linehl = "",
+            numhl = "",
+        })
+
+        vim.fn.sign_define("DapBreakpointRejected", {
+            text = "", -- or "❌"
+            texthl = "DiagnosticSignError",
+            linehl = "",
+            numhl = "",
+        })
+
+        vim.fn.sign_define("DapStopped", {
+            text = "", -- or "→"
+            texthl = "DiagnosticSignWarn",
+            linehl = "Visual",
+            numhl = "DiagnosticSignWarn",
+        })
+
+        -- Automatically open/close DAP UI
+        dap.listeners.after.event_initialized["dapui_config"] = function()
+            dapui.open()
+        end
+
+        local opts = { noremap = true, silent = true }
+        -- Step Into
+        vim.keymap.set("n", "<leader>di", function()
+            dap.step_into()
+        end, opts)
+
+        -- Step Out
+        vim.keymap.set("n", "<leader>dO", function()
+            dap.step_out()
+        end, opts)
+
+        -- Keymap to terminate debugging
+        vim.keymap.set("n", "<leader>dq", function()
+            require("dap").terminate()
+        end, opts)
+
+        -- Toggle DAP UI
+        vim.keymap.set("n", "<leader>du", function()
+            dapui.toggle()
+        end, opts)
+    end,
 },
 
 })
