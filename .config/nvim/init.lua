@@ -376,7 +376,7 @@ require("lazy").setup({
             end;
         },
         }
-
+        
 
         local dapui = require("dapui")
         dapui.setup()
