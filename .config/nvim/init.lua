@@ -408,12 +408,28 @@ require("lazy").setup({
             numhl = "DiagnosticSignWarn",
         })
 
-        -- Automatically open/close DAP UI
+          -- Automatically open/close DAP UI
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
         end
 
         local opts = { noremap = true, silent = true }
+
+        -- Toggle breakpoint
+        vim.keymap.set("n", "<leader>db", function()
+            dap.toggle_breakpoint()
+        end, opts)
+
+        -- Continue / Start
+        vim.keymap.set("n", "<leader>dc", function()
+            dap.continue()
+        end, opts)
+
+        -- Step Over
+        vim.keymap.set("n", "<leader>do", function()
+            dap.step_over()
+        end, opts)
+
         -- Step Into
         vim.keymap.set("n", "<leader>di", function()
             dap.step_into()
@@ -423,7 +439,7 @@ require("lazy").setup({
         vim.keymap.set("n", "<leader>dO", function()
             dap.step_out()
         end, opts)
-
+                
         -- Keymap to terminate debugging
         vim.keymap.set("n", "<leader>dq", function()
             require("dap").terminate()
@@ -433,6 +449,7 @@ require("lazy").setup({
         vim.keymap.set("n", "<leader>du", function()
             dapui.toggle()
         end, opts)
+
     end,
 },
 
