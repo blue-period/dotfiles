@@ -315,28 +315,73 @@ require("lazy").setup({
     dependencies = {
         "nvim-neotest/nvim-nio",
         "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap-python",
         "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
         local dap = require("dap")
+        --dap python setup manual
+        -- adapter
+        dap.adapters.python = function(cb, config)
+        if config.request == 'attach' then
+            ---@diagnostic disable-next-line: undefined-field
+            local port = (config.connect or config).port or '5678'
+            ---@diagnostic disable-next-line: undefined-field
+            local host = (config.connect or config).host or '127.0.0.1'
+            cb(
+                {
+                    type = 'server',
+                    port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+                    host = host,
+                    options = {
+                        source_filetype = 'python',
+                    },
+                }
+            )
+        else
+            cb(
+                {
+                    type = 'executable',
+                    command = ' /home/ramsddc1/miniconda3/envs/Comfy/bin/python',
+                    args = { '-m', 'debugpy.adapter' },
+                    options = {
+                        source_filetype = 'python',
+                    },
+                }
+            )
+        end
+        end
+        --configuration for python manual
+        dap.configurations.python = {
+        {
+            -- The first three options are required by nvim-dap
+            type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+            request = 'attach';
+            name = "Launch file";
 
+            -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+            program = "${file}"; -- This configuration will launch the current file if used.
+            pythonPath = function()
+            -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+            -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+            -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+            local cwd = vim.fn.getcwd()
+            if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+                return cwd .. '/venv/bin/python'
+            elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+                return cwd .. '/.venv/bin/python'
+            else
+                return '/usr/bin/python'
+            end
+            end;
+        },
+        }
 
 
         local dapui = require("dapui")
         dapui.setup()
         require("dapui").setup({})
 
-        local dap_python = require("dap-python")
-        local debugpy_path = '/home/ramsddc1/miniconda3/envs/Comfy/bin/python'
-        dap_python.setup(debugpy_path)
-        table.insert(require('dap').configurations.python, {
-            type = 'python',
-            request = 'attach',
-            name = 'My custom launch configuration',
-            program = '${file}',
-            -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-        })
 
         require("nvim-dap-virtual-text").setup({
             commented = true, -- Show virtual text alongside comment
